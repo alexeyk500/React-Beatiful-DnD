@@ -30,10 +30,12 @@ function App() {
   const [cardsList, setCardsList] = useState(list)
 
   const onDragEnd = (result: DropResult) => {
-    const newList = [...cardsList];
-    const [reorderedItem] = newList.splice(result.source.index, 1);
-    newList.splice(result.destination?.index!, 0, reorderedItem);
-    setCardsList(newList);
+    if (result.destination) {
+      const newList = [...cardsList];
+      const [reorderedItem] = newList.splice(result.source.index, 1);
+      newList.splice(result.destination.index, 0, reorderedItem);
+      setCardsList(newList);
+    }
   }
 
   return (
