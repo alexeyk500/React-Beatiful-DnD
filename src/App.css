@@ -5,16 +5,20 @@ body {
 
 .container {
   display: flex;
-  padding: 40px;
   height: 100vh;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   background-color: #1B1B1B;
 }
 
 .list_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
   background-color: #2B2B2B;
-  padding: 50px 50px;
+  padding: 50px 50px 25px 50px;
 }
 
 .card {
@@ -23,8 +27,4 @@ body {
   background-color: #4B4B4B;
   font-size: 24px;
   color: #BBBBBB;
-}
-
-.card:last-child {
-  margin-bottom: 0;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {DragDropContext, Droppable} from 'react-beautiful-dnd';
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 const cardsList = [
   {
@@ -34,24 +34,45 @@ function App() {
 
   return (
     <div className={'container'}>
-      <div className={'list_wrapper'}>
         <DragDropContext
           onDragEnd={onDragEnd}
         >
-          {
-            cardsList.map((card, ind)=>{
-              return(
-                <div key={ind} className={'card'}>
-                  {card.id} - {card.text}
+          <div className={'list_wrapper'}>
+            <Droppable droppableId={'list'}>
+            { (provided) => (
+                <div
+                  className={'list'}
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {
+                    cardsList.map((card, ind)=>{
+                      return(
+                        <Draggable  key = {ind} draggableId={ind+''} index={ind}>
+                          {(provided)=>(
+                            <div
+                              className={'card'}
+                              ref={provided.innerRef}
+                              {...provided.dragHandleProps}
+                              {...provided.draggableProps}
+                            >
+                              {card.id} - {card.text}
+                            </div>
+                          )}
+                        </Draggable>
+                      )
+                    })
+                  }
+                  {provided.placeholder}
                 </div>
               )
-            })
-          }
+            }
+          </Droppable>
+          </div>
         </DragDropContext>
-
       </div>
-    </div>
   );
+
 }
 
 export default App;
