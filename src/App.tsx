@@ -1,24 +1,55 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {DragDropContext, Droppable} from 'react-beautiful-dnd';
+
+const cardsList = [
+  {
+    id: 0,
+    text: ' Card with id=0'
+  },
+  {
+    id: 1,
+    text: ' Card with id=1'
+  },
+  {
+    id: 2,
+    text: ' Card with id=2'
+  },
+  {
+    id: 3,
+    text: ' Card with id=3'
+  },
+  {
+    id: 4,
+    text: ' Card with id=4'
+  },
+
+]
 
 function App() {
+
+  const onDragEnd = () => {
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className={'container'}>
+      <div className={'list_wrapper'}>
+        <DragDropContext
+          onDragEnd={onDragEnd}
         >
-          Learn React
-        </a>
-      </header>
+          {
+            cardsList.map((card, ind)=>{
+              return(
+                <div key={ind} className={'card'}>
+                  {card.id} - {card.text}
+                </div>
+              )
+            })
+          }
+        </DragDropContext>
+
+      </div>
     </div>
   );
 }
